@@ -5,9 +5,6 @@ import { useRouter } from "next/navigation";
 import { startTransition, useEffect, useState } from "react";
 import {
   ArrowRight,
-  BadgeCheck,
-  ShieldCheck,
-  Sparkles,
   Plus,
 } from "lucide-react";
 import { useAuth } from "@/src/context/AuthContext";
