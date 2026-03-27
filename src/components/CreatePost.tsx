@@ -1,6 +1,8 @@
 "use client";
 
+import { Plus } from "lucide-react";
 import { useState } from "react";
+
 
 type CreatePostProps = {
   onSubmit: (content: string, file?: File) => Promise<boolean>;
@@ -45,7 +47,7 @@ export default function CreatePost({
       />
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <label className="flex cursor-pointer items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-sm text-slate-300 transition hover:border-cyan-300/40 hover:text-cyan-100">
+        <label className="flex cursor-pointer items-center gap-2 rounded-md border border-white/10 px-4 py-2 text-sm text-slate-300 transition hover:border-cyan-300/40 hover:text-cyan-100">
           <input
             type="file"
             accept="image/*"
@@ -56,14 +58,14 @@ export default function CreatePost({
               }
             }}
           />
-          {file ? `Selected: ${file.name}` : "Add image"}
+          {file ? `Selected: ${file.name}` : <Plus/>}
         </label>
 
         <button
           type="button"
           onClick={handleSubmit}
           disabled={loading || !content.trim()}
-          className="rounded-full bg-gradient-to-r from-[#00ff87] via-[#32f4c8] to-[#60efff] px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:shadow-[0_0_30px_rgba(96,239,255,0.25)] disabled:cursor-not-allowed disabled:opacity-60"
+          className="rounded-md bg-gradient-to-r from-[#00ff87] via-[#32f4c8] to-[#60efff] px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:shadow-[0_0_30px_rgba(96,239,255,0.25)] disabled:cursor-not-allowed disabled:opacity-60"
         >
           {loading ? "Posting..." : "Post now"}
         </button>

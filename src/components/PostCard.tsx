@@ -1,7 +1,7 @@
 "use client";
 
-import { Laugh, ThumbsUp } from "lucide-react";
 import type { Post } from "@/src/types/post.types";
+import { Laugh, ThumbsUp } from "lucide-react";
 
 type PostCardProps = {
   post: Post;
@@ -10,10 +10,25 @@ type PostCardProps = {
 export default function PostCard({ post }: PostCardProps) {
   const author = typeof post.userId === "string" ? null : post.userId;
 
+
+  console.log("URL link :", author)
+
   return (
-    <div className="mb-4 rounded-[28px] border border-white/10 bg-slate-950/65 p-5 shadow-[0_20px_70px_rgba(0,0,0,0.25)]">
+    <div className="mb-4 rounded-md border border-white/10 bg-slate-950/65 p-5 shadow-[0_20px_70px_rgba(0,0,0,0.25)]">
       <div className="mb-2 flex items-center gap-3">
-        <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[#00ff87]/25 to-[#60efff]/25" />
+        <div className="relative h-10 w-10 overflow-hidden rounded-full border border-white/10 bg-slate-800">
+          {author?.profilePic ? (
+            <img
+              src={author.profilePic}
+              alt={`${author.username}'s profile`}
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[#00ff87]/25 to-[#60efff]/25 text-xs text-white">
+              {author?.username?.[0]?.toUpperCase() || "?"}
+            </div>
+          )}
+        </div>
         <p className="font-semibold text-slate-100">
           {author?.username ?? "Unknown user"}
         </p>

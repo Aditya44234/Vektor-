@@ -36,8 +36,9 @@ export async function createUser(data: {
   username: string;
   email: string;
   password: string;
+  profilePic?: string;
 }) {
-  const { username, email, password } = data;
+  const { username, email, password, profilePic } = data;
 
   const existing = await User.findOne({
     $or: [{ email }, { username }],
@@ -53,6 +54,7 @@ export async function createUser(data: {
     username,
     email,
     password: hashedPassword,
+    profilePic
   });
 
   return serializeUser(user);

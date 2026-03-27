@@ -23,6 +23,7 @@ export async function signUpAPI(data: {
   username: string;
   email: string;
   password: string;
+  profilePic?: string;
 }) {
   const res = await fetch("/api/auth/signup", {
     method: "POST",

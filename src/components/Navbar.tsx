@@ -9,6 +9,8 @@ export default function Navbar() {
   const router = useRouter();
   const { isAuthenticated, isReady, logout, user } = useAuth();
 
+  console.log("Image URL :", user?.profilePic)
+
   const handleLogout = () => {
     logout();
     router.replace("/login");

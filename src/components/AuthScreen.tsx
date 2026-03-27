@@ -3,9 +3,16 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { startTransition, useEffect, useState } from "react";
-import { ArrowRight, BadgeCheck, ShieldCheck, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  BadgeCheck,
+  ShieldCheck,
+  Sparkles,
+  Plus,
+} from "lucide-react";
 import { useAuth } from "@/src/context/AuthContext";
 import { loginAPI, signUpAPI } from "@/src/services/auth.api";
+import { uploadImageAPI } from "../services/upload.api";
 
 type AuthMode = "login" | "signup";
 
@@ -38,24 +45,6 @@ const screenCopy = {
   },
 } as const;
 
-const featureCards = [
-  {
-    icon: Sparkles,
-    title: "Fast publishing",
-    text: "Write short updates, attach images, and post instantly.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Protected actions",
-    text: "Your session is stored once and reused across the app.",
-  },
-  {
-    icon: BadgeCheck,
-    title: "Unified flow",
-    text: "Signup, login, feed access, and posting now use the same auth state.",
-  },
-];
-
 export default function AuthScreen({ mode }: AuthScreenProps) {
   const router = useRouter();
   const { isReady, login, token } = useAuth();
@@ -64,6 +53,7 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
 
   const copy = screenCopy[mode];
 
@@ -78,6 +68,11 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
 
     const trimmedEmail = email.trim();
     const trimmedUsername = username.trim();
+    let imageUrl = "";
+    if (file) {
+      const uploadRes = await uploadImageAPI(file);
+      imageUrl = uploadRes.url;
+    }
 
     if (mode === "signup" && trimmedUsername.length < 3) {
       setError("Username must be at least 3 characters long.");
@@ -98,6 +93,7 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
           username: trimmedUsername,
           email: trimmedEmail,
           password,
+          profilePic: imageUrl,
         });
       }
 
@@ -118,7 +114,7 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
       setError(
         error instanceof Error
           ? error.message
-          : "Something went wrong. Please try again."
+          : "Something went wrong. Please try again.",
       );
     } finally {
       setSubmitting(false);
@@ -130,40 +126,6 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(0,255,135,0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(96,239,255,0.16),transparent_30%)]" />
 
       <div className="relative mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-4 py-8 lg:flex-row lg:items-center">
-        <section className="flex-1 rounded-[36px] border border-white/10 bg-white/5 p-8 shadow-[0_30px_120px_rgba(0,0,0,0.3)] backdrop-blur-xl lg:p-10">
-          <Link
-            href="/feed"
-            className="inline-flex items-center rounded-full border border-white/10 px-4 py-2 text-sm text-slate-200 transition hover:border-cyan-300/30 hover:text-white"
-          >
-            PulsePost
-          </Link>
-
-          <div className="mt-10 max-w-xl">
-            <p className="text-sm uppercase tracking-[0.35em] text-cyan-200/80">
-              {copy.eyebrow}
-            </p>
-            <h1 className="mt-4 text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-              {copy.title}
-            </h1>
-            <p className="mt-5 text-base leading-7 text-slate-300">
-              {copy.description}
-            </p>
-          </div>
-
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
-            {featureCards.map(({ icon: Icon, title, text }) => (
-              <div
-                key={title}
-                className="rounded-[24px] border border-white/10 bg-slate-950/45 p-5"
-              >
-                <Icon className="h-5 w-5 text-cyan-200" />
-                <p className="mt-4 text-base font-medium text-white">{title}</p>
-                <p className="mt-2 text-sm leading-6 text-slate-400">{text}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
         <section className="w-full max-w-xl rounded-[36px] border border-white/10 bg-[#08111d]/92 p-8 shadow-[0_30px_120px_rgba(0,0,0,0.35)] backdrop-blur-xl lg:p-10">
           <p className="text-sm uppercase tracking-[0.3em] text-emerald-200/80">
             {mode === "login" ? "Access your account" : "Start your profile"}
@@ -181,6 +143,21 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
             </div>
           ) : (
             <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
+              {mode === "signup" ? (
+                <label className="flex cursor-pointer items-center gap-2 rounded-md border border-white/10 px-4 py-2 text-sm text-slate-300 transition hover:border-cyan-300/40 hover:text-cyan-100">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => {
+                      if (e.target.files?.[0]) {
+                        setFile(e.target.files[0]);
+                      }
+                    }}
+                  />
+                  {file ? `Selected: ${file.name}` : <Plus />}
+                </label>
+              ) : null}
               {mode === "signup" ? (
                 <label className="block">
                   <span className="mb-2 block text-sm font-medium text-slate-200">
@@ -243,11 +220,11 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
             </form>
           )}
 
-          <div className="mt-6 flex flex-wrap items-center justify-between gap-3 text-sm">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-sm">
             <span className="text-slate-400">{copy.footerText}</span>
             <Link
               href={copy.footerHref}
-              className="font-medium text-cyan-200 transition hover:text-cyan-100"
+              className="font-medium text-cyan-200 underline  transition hover:text-cyan-100"
             >
               {copy.footerLinkLabel}
             </Link>
