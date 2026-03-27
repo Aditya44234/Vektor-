@@ -21,10 +21,10 @@ export default function Navbar() {
           href="/feed"
           className="bg-gradient-to-r from-[#00ff87] via-[#9dffcb] to-[#60efff] bg-clip-text text-xl font-semibold tracking-tight text-transparent"
         >
-          PulsePost
+         Vektor-
         </Link>
 
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 cursor-pointer">
           <Link
             href="/feed"
             className="rounded-full px-3 py-2 text-sm text-slate-300 transition hover:bg-white/5 hover:text-white"
@@ -38,13 +38,13 @@ export default function Navbar() {
             </span>
           ) : isAuthenticated ? (
             <>
-              <span className="hidden rounded-full border border-cyan-300/20 bg-cyan-400/10 px-3 py-2 text-sm text-cyan-100 sm:inline-flex">
+              <span className="hidden rounded-md border border-cyan-300/20 bg-cyan-400/10 px-3 py-2 text-sm text-cyan-100 sm:inline-flex">
                 @{user?.username}
               </span>
               <button
                 type="button"
                 onClick={handleLogout}
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-2 text-sm text-slate-200 transition hover:border-rose-300/30 hover:bg-rose-500/10 hover:text-white"
+                className="inline-flex items-center gap-2 rounded-md cursor-pointer border border-white/10 px-3 py-2 text-sm text-slate-200 transition hover:border-rose-300/30 hover:bg-rose-500/10 hover:text-white"
               >
                 <LogOut className="h-4 w-4" />
                 Log out

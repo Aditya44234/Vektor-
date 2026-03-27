@@ -18,9 +18,8 @@ export default function FeedPage() {
       <Navbar />
 
       <div className="mx-auto mt-8 max-w-2xl px-4 pb-10">
-        <div className="mb-6 rounded-[32px] border border-white/10 bg-[linear-gradient(135deg,rgba(0,255,135,0.12),rgba(96,239,255,0.08),rgba(6,13,22,0.95))] p-6 shadow-[0_30px_120px_rgba(0,0,0,0.35)]">
+        {/* <div className="mb-6 rounded-[32px] border border-white/10 bg-[linear-gradient(135deg,rgba(0,255,135,0.12),rgba(96,239,255,0.08),rgba(6,13,22,0.95))] p-6 shadow-[0_30px_120px_rgba(0,0,0,0.35)]">
           <p className="text-sm uppercase tracking-[0.3em] text-cyan-200/80">
-            PulsePost feed
           </p>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight text-white">
             See what the community is talking about right now.
@@ -29,7 +28,7 @@ export default function FeedPage() {
             Browse the latest posts, jump into the conversation, and publish your
             own updates when you are signed in.
           </p>
-        </div>
+        </div> */}
 
         {!isReady ? (
           <div className="mb-6 rounded-[28px] border border-white/10 bg-slate-950/65 p-5 text-sm text-slate-400">

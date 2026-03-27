@@ -31,11 +31,11 @@ export default function PostCard({ post }: PostCardProps) {
 
       <div className="flex gap-4 text-sm text-slate-400">
         <span className="inline-flex items-center gap-1.5">
-          <ThumbsUp className="h-4 w-4" />
+          <ThumbsUp className="h-4 w-4 cursor-pointer" />
           {post.likes?.length ?? 0}
         </span>
         <span className="inline-flex items-center gap-1.5">
-          <Laugh className="h-4 w-4" />
+          <Laugh className="h-4 w-4 cursor-pointer" />
           {post.piss?.length ?? 0}
         </span>
       </div>
