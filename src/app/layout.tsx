@@ -3,8 +3,8 @@ import { AuthProvider } from "../context/AuthContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "vektor.ai",
-  description: "Simple social media app",
+  title: "Loopin",
+  description: "Share quick posts and stay in the loop.",
 };
 
 export default function RootLayout({

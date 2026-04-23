@@ -1,17 +1,26 @@
 "use client";
 
 import type { Post } from "@/src/types/post.types";
-import { Laugh, ThumbsUp } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
+import ReactionButtons from "./ReactionButtons";
 
 type PostCardProps = {
   post: Post;
 };
 
 export default function PostCard({ post }: PostCardProps) {
+  const { user } = useAuth();
   const author = typeof post.userId === "string" ? null : post.userId;
 
+  // Convert likes/piss ObjectIds to strings for comparison
+  const likeIds = (post.likes || []).map((id) =>
+    typeof id === "string" ? id : String(id),
+  );
+  const pissIds = (post.piss || []).map((id) =>
+    typeof id === "string" ? id : String(id),
+  );
 
-  console.log("URL link :", author)
+  // console.log("URL link :", author);
 
   return (
     <div className="mb-4 rounded-md border border-white/10 bg-slate-950/65 p-5 shadow-[0_20px_70px_rgba(0,0,0,0.25)]">
@@ -24,7 +33,7 @@ export default function PostCard({ post }: PostCardProps) {
               className="h-full w-full object-cover"
             />
           ) : (
-            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[#00ff87]/25 to-[#60efff]/25 text-xs text-white">
+            <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-[#00ff87]/25 to-[#60efff]/25 text-xs text-white">
               {author?.username?.[0]?.toUpperCase() || "?"}
             </div>
           )}
@@ -34,26 +43,22 @@ export default function PostCard({ post }: PostCardProps) {
         </p>
       </div>
 
-      <p className="mb-3 text-slate-200">{post.content}</p>
+      <p className="mb-3 text-slate-200 line-clamp-3">{post.content}</p>
 
       {post.imageUrl && (
         <img
           src={post.imageUrl}
           alt="post"
-          className="mb-3 rounded-2xl border border-white/10"
+          className="mb-3 h-64 w-full rounded-2xl border border-white/10 object-cover"
         />
       )}
 
-      <div className="flex gap-4 text-sm text-slate-400">
-        <span className="inline-flex items-center gap-1.5">
-          <ThumbsUp className="h-4 w-4 cursor-pointer" />
-          {post.likes?.length ?? 0}
-        </span>
-        <span className="inline-flex items-center gap-1.5">
-          <Laugh className="h-4 w-4 cursor-pointer" />
-          {post.piss?.length ?? 0}
-        </span>
-      </div>
+      <ReactionButtons
+        postId={post._id}
+        currentUserId={user?._id || null}
+        likes={likeIds}
+        piss={pissIds}
+      />
     </div>
   );
 }

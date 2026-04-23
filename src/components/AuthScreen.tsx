@@ -22,7 +22,7 @@ const screenCopy = {
     eyebrow: "Welcome back",
     title: "Pick up the conversation where you left it.",
     description:
-      "Log in to publish updates, upload visuals, and keep your PulsePost feed moving.",
+      "Log in to publish updates, upload visuals, and keep your Loopin feed moving.",
     submitLabel: "Log in",
     loadingLabel: "Logging in...",
     footerText: "Need an account?",
@@ -30,7 +30,7 @@ const screenCopy = {
     footerHref: "/signup",
   },
   signup: {
-    eyebrow: "Join PulsePost",
+    eyebrow: "Join Loopin",
     title: "Create your account and start posting today.",
     description:
       "Set up your profile, jump into the feed, and share your first update in a few seconds.",

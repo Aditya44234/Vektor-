@@ -1,8 +1,8 @@
-# 🚀 PulsePost — Full Project Execution Plan (Next.js + TypeScript + MongoDB + AI)
+#  Loopin — Full Project Execution Plan (Next.js + TypeScript + MongoDB + AI)
 
-## 📌 Project Vision
+##  Project Vision
 
-PulsePost is a modern AI-powered microblogging platform (like Twitter/X) where users can:
+Loopin is a modern AI-powered microblogging platform (like Twitter/X) where users can:
 
 * Create profiles
 * Post short text + optional images
@@ -18,9 +18,9 @@ Goal: Build a **production-ready, scalable full-stack app** while learning:
 
 ---
 
-# 🧱 PHASE 1 — MVP (Must Build First)
+#  PHASE 1 — MVP (Must Build First)
 
-## ✅ Core Features
+## Core Features
 
 1. Authentication (Signup/Login)
 2. User Profile (name, bio, profile pic, interests)
@@ -31,7 +31,7 @@ Goal: Build a **production-ready, scalable full-stack app** while learning:
 
 ---
 
-# 🧠 PHASE 2 — AI + SMART FEED
+#  PHASE 2 — AI + SMART FEED
 
 1. AI categorization of posts
 2. Interest-based feed filtering
@@ -39,7 +39,7 @@ Goal: Build a **production-ready, scalable full-stack app** while learning:
 
 ---
 
-# 🏗️ TECH STACK
+#  TECH STACK
 
 ## Frontend + Backend (Fullstack)
 
@@ -72,7 +72,7 @@ Goal: Build a **production-ready, scalable full-stack app** while learning:
 # 📂 PROJECT STRUCTURE
 
 ```
-pulsepost/
+Loopin/
 │
 ├── app/
 │   ├── (auth)/
@@ -100,7 +100,7 @@ pulsepost/
 
 ---
 
-# 🗄️ DATABASE DESIGN (MongoDB)
+#  DATABASE DESIGN (MongoDB)
 
 ## User Schema
 
@@ -144,7 +144,7 @@ pulsepost/
 
 ---
 
-# 🔌 API DESIGN
+#  API DESIGN
 
 ## Auth
 
@@ -172,7 +172,7 @@ pulsepost/
 
 ---
 
-# ⚙️ SYSTEM DESIGN CONCEPTS (IMPORTANT)
+#  SYSTEM DESIGN CONCEPTS (IMPORTANT)
 
 ## 1. Feed System
 
@@ -212,7 +212,7 @@ Example Categories:
 
 ---
 
-# 🎨 UI PAGES
+#  UI PAGES
 
 ## Auth
 
@@ -228,7 +228,7 @@ Example Categories:
 
 ---
 
-# 🔄 DATA FLOW (IMPORTANT)
+# DATA FLOW (IMPORTANT)
 
 ### Create Post Flow
 
@@ -249,7 +249,7 @@ Example Categories:
 
 ---
 
-# 🧩 COMPONENT BREAKDOWN
+#  COMPONENT BREAKDOWN
 
 * Navbar
 * PostCard
@@ -261,7 +261,7 @@ Example Categories:
 
 ---
 
-# 🧪 FUTURE FEATURES (DO NOT BUILD NOW)
+#  FUTURE FEATURES (DO NOT BUILD NOW)
 
 * Comments
 * Follow system
@@ -272,7 +272,7 @@ Example Categories:
 
 ---
 
-# 📚 LEARNING GOALS MAPPING
+#  LEARNING GOALS MAPPING
 
 ## TypeScript
 
@@ -295,7 +295,7 @@ Example Categories:
 
 ---
 
-# 🚦 DEVELOPMENT ORDER (STRICT)
+# DEVELOPMENT ORDER (STRICT)
 
 ## Step 1
 
@@ -339,7 +339,7 @@ AI classification
 
 ---
 
-# 💡 FINAL NOTE
+#  FINAL NOTE
 
 Build this like:
 
@@ -349,7 +349,7 @@ Build this like:
 
 ---
 
-👉 Once MVP is done, we’ll move to:
+ Once MVP is done, we’ll move to:
 
 * Feed ranking algorithm
 * Real-time system

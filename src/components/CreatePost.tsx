@@ -30,7 +30,7 @@ export default function CreatePost({
   };
 
   return (
-    <div className="mb-6 rounded-[28px] border border-white/10 bg-slate-950/70 p-5 shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur">
+    <div className="mb-6 rounded-md border border-white/10 bg-slate-950/70 p-5 shadow-[0_20px_80px_rgba(0,0,0,0.35)] backdrop-blur">
       <div className="mb-3">
         <p className="text-sm font-medium text-cyan-200">Create a post</p>
         <p className="text-sm text-slate-400">

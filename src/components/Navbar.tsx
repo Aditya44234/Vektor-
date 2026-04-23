@@ -9,8 +9,6 @@ export default function Navbar() {
   const router = useRouter();
   const { isAuthenticated, isReady, logout, user } = useAuth();
 
-  console.log("Image URL :", user?.profilePic)
-
   const handleLogout = () => {
     logout();
     router.replace("/login");
@@ -23,7 +21,7 @@ export default function Navbar() {
           href="/feed"
           className="bg-gradient-to-r from-[#00ff87] via-[#9dffcb] to-[#60efff] bg-clip-text text-xl font-semibold tracking-tight text-transparent"
         >
-         Vektor-
+          Loopin
         </Link>
 
         <div className="flex items-center gap-2 sm:gap-3 cursor-pointer">
