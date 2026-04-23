@@ -9,6 +9,10 @@ type PublicUser = UserProfile & {
   interests: string[];
 };
 
+
+export type PublicProfile = Omit<PublicUser, "email"> & {
+  createdAt?: string;
+}
 type SerializableUser = {
   _id: unknown;
   username: string;
@@ -16,8 +20,14 @@ type SerializableUser = {
   profilePic?: string;
   bio?: string;
   interests?: string[];
+  createdAt?: Date | string;
   toObject?: () => SerializableUser;
 };
+
+
+function getUserSource(user: SerializableUser) {
+  return typeof user?.toObject === "function" ? user.toObject() : user;
+}
 
 function serializeUser(user: SerializableUser): PublicUser {
   const source = typeof user?.toObject === "function" ? user.toObject() : user;
@@ -29,6 +39,21 @@ function serializeUser(user: SerializableUser): PublicUser {
     profilePic: source.profilePic ?? "",
     bio: source.bio ?? "",
     interests: Array.isArray(source.interests) ? source.interests : [],
+  };
+}
+
+function serializePublicProfile(user: SerializableUser): PublicProfile {
+  const source = getUserSource(user);
+
+  return {
+    _id: String(source._id),
+    username: source.username,
+    profilePic: source.profilePic ?? "",
+    bio: source.bio ?? "",
+    interests: Array.isArray(source.interests) ? source.interests : [],
+    createdAt: source.createdAt
+      ? new Date(source.createdAt).toISOString()
+      : undefined,
   };
 }
 
@@ -85,6 +110,30 @@ export async function loginUser(data: {
 
   return { user: serializeUser(user as SerializableUser), token };
 }
+
+
+export async function getPublicUserByUsername(username: string) {
+  const trimmedUsername = username.trim();
+
+  if (!trimmedUsername) {
+    throw new Error("Username is required");
+  }
+
+  const user = await User.findOne({ username: trimmedUsername }).select(
+    "username profilePic bio interests createdAt"
+  );
+
+  if (!user) {
+    throw new Error("USer not found ");
+  }
+
+  return serializePublicProfile(user as SerializableUser)
+
+}
+
+
+
+
 
 export async function searchUsers(query: string) {
   if (!query) return [];
