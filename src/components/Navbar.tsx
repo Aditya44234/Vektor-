@@ -38,12 +38,12 @@ export default function Navbar() {
         </Link>
 
         <div className="flex items-center gap-2 sm:gap-3 cursor-pointer">
-          <Link
+          {/* <Link
             href="/feed"
             className="rounded-full px-3 py-2 text-sm text-slate-300 transition hover:bg-white/5 hover:text-white"
           >
             Feed
-          </Link>
+          </Link> */}
 
           {!isReady ? (
             <span className="rounded-full border border-white/10 px-3 py-2 text-sm text-slate-400">

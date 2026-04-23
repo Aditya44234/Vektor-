@@ -23,9 +23,9 @@ export default function PostCard({ post }: PostCardProps) {
   // console.log("URL link :", author);
 
   return (
-    <div className="mb-4 rounded-md border border-white/10 bg-slate-950/65 p-5 shadow-[0_20px_70px_rgba(0,0,0,0.25)]">
-      <div className="mb-2 flex items-center gap-3">
-        <div className="relative h-10 w-10 overflow-hidden rounded-full border border-white/10 bg-slate-800">
+    <div className="mb-1 rounded-md min-w-full border border-white/10 bg-slate-950/65 py-5 shadow-[0_20px_70px_rgba(0,0,0,0.25)]">
+      <div className="mb-2 flex items-center gap-3 px-3">
+        <div className="relative h-10 w-10 overflow-hidden rounded-full border border-white/10 bg-slate-800 ">
           {author?.profilePic ? (
             <img
               src={author.profilePic}
@@ -43,10 +43,9 @@ export default function PostCard({ post }: PostCardProps) {
         </p>
       </div>
 
-      <p className="mb-3 text-slate-200 line-clamp-3">{post.content}</p>
 
       {post.imageUrl && (
-        <div className="mb-3 max-h-100 w-full overflow-hidden rounded-2xl border border-white/10 bg-slate-900">
+        <div className="mb-3 max-h-120 w-full overflow-hidden  border border-white/10 bg-slate-900">
           <img
             src={post.imageUrl}
             alt="post"
@@ -54,6 +53,7 @@ export default function PostCard({ post }: PostCardProps) {
           />
         </div>
       )}
+      <p className="mb-3 text-slate-200 line-clamp-3 px-3">{post.content}</p>
 
       <ReactionButtons
         postId={post._id}

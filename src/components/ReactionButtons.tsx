@@ -77,7 +77,7 @@ export default function ReactionButtons({
   };
 
   return (
-    <div className="flex gap-4 text-sm text-slate-400">
+    <div className="flex gap-4 text-sm text-slate-400 px-3">
       {error && <p className="text-rose-400 text-xxs">{error}</p>}
 
       {/* Likes button */}
