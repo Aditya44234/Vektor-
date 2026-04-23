@@ -5,6 +5,10 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Loopin",
   description: "Share quick posts and stay in the loop.",
+  icons: {
+    icon: [{ url: "/BrandLogo.svg", type: "image/svg+xml" }],
+    shortcut: "/BrandLogo.svg",
+  },
 };
 
 export default function RootLayout({

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { startTransition, useEffect, useState } from "react";
@@ -124,6 +125,27 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
 
       <div className="relative mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-4 py-8 lg:flex-row lg:items-center">
         <section className="w-full max-w-xl rounded-[36px] border border-white/10 bg-[#08111d]/92 p-8 shadow-[0_30px_120px_rgba(0,0,0,0.35)] backdrop-blur-xl lg:p-10">
+          <div className="mb-7 flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-[0_0_34px_rgba(96,239,255,0.14)]">
+              <Image
+                src="/BrandLogo.svg"
+                alt="Loopin logo"
+                width={44}
+                height={44}
+                unoptimized
+                className="h-11 w-11 object-contain"
+              />
+            </div>
+            <div>
+              <p className="bg-gradient-to-r from-[#00ff87] via-[#9dffcb] to-[#60efff] bg-clip-text text-2xl font-semibold tracking-tight text-transparent">
+                Loopin
+              </p>
+              <p className="text-xs font-medium uppercase tracking-[0.22em] text-slate-500">
+                Stay in the loop
+              </p>
+            </div>
+          </div>
+
           <p className="text-sm uppercase tracking-[0.3em] text-emerald-200/80">
             {mode === "login" ? "Access your account" : "Start your profile"}
           </p>

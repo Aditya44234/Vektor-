@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { LogOut } from "lucide-react";
@@ -19,9 +20,21 @@ export default function Navbar() {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4">
         <Link
           href="/feed"
-          className="bg-gradient-to-r from-[#00ff87] via-[#9dffcb] to-[#60efff] bg-clip-text text-xl font-semibold tracking-tight text-transparent"
+          className="flex items-center gap-2"
         >
-          Loopin
+          <span className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl ">
+            <Image
+              src="/BrandLogo.svg"
+              alt="Loopin logo"
+              width={72}
+              height={72}
+              unoptimized
+              className="h-full  w-full  object-contain"
+            />
+          </span>
+          <span className="bg-gradient-to-r from-[#00ff87] via-[#9dffcb] to-[#60efff] bg-clip-text text-xl font-semibold tracking-tight text-transparent">
+            Loopin
+          </span>
         </Link>
 
         <div className="flex items-center gap-2 sm:gap-3 cursor-pointer">
@@ -47,7 +60,7 @@ export default function Navbar() {
                 className="inline-flex items-center gap-2 rounded-md cursor-pointer border border-white/10 px-3 py-2 text-sm text-slate-200 transition hover:border-rose-300/30 hover:bg-rose-500/10 hover:text-white"
               >
                 <LogOut className="h-4 w-4" />
-                Log out
+                {/* Log out */}
               </button>
             </>
           ) : (

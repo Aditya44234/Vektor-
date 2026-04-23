@@ -46,11 +46,13 @@ export default function PostCard({ post }: PostCardProps) {
       <p className="mb-3 text-slate-200 line-clamp-3">{post.content}</p>
 
       {post.imageUrl && (
-        <img
-          src={post.imageUrl}
-          alt="post"
-          className="mb-3 h-64 w-full rounded-2xl border border-white/10 object-cover"
-        />
+        <div className="mb-3 max-h-100 w-full overflow-hidden rounded-2xl border border-white/10 bg-slate-900">
+          <img
+            src={post.imageUrl}
+            alt="post"
+            className="h-full w-full object-contain"
+          />
+        </div>
       )}
 
       <ReactionButtons
