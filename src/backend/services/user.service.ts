@@ -124,7 +124,7 @@ export async function getPublicUserByUsername(username: string) {
   );
 
   if (!user) {
-    throw new Error("USer not found ");
+    throw new Error("User not found");
   }
 
   return serializePublicProfile(user as SerializableUser)

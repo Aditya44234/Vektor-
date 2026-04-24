@@ -1,9 +1,9 @@
 export default function ProfilePageSkeleton() {
   return (
     <div className="animate-pulse">
-      <div className="mb-6 flex">
+      {/* <div className="mb-6 flex">
         <div className="h-11 w-11 rounded-full border border-white/10 bg-slate-900/90" />
-      </div>
+      </div> */}
 
       <section className="rounded-[32px] border border-white/10 bg-slate-950/60 p-6 shadow-[0_20px_70px_rgba(0,0,0,0.25)] md:p-8">
         <div className="flex flex-col gap-7 md:flex-row md:items-start">
