@@ -78,14 +78,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
       {/* <Navbar /> */}
 
       <main className="mx-auto  max-w-6xl px-4 pb-24">
-        <button
-          type="button"
-          onClick={handleBack}
-          aria-label="Go back"
-          className="mb-5 cursor-pointer  mt-2 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/55 text-slate-200 transition hover:border-cyan-300/30 hover:bg-white/5 hover:text-white"
-        >
-          <ArrowLeft className="h-5 w-5" />
-        </button>
+       
 
         {loading ? <ProfilePageSkeleton /> : null}
 

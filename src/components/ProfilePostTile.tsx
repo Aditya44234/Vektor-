@@ -40,9 +40,9 @@ export default function ProfilePostTile({ post }: ProfilePostTileProps) {
       )}
 
       <div className="absolute inset-x-0 top-0 flex items-center justify-between px-3 py-3">
-        <span className="rounded-full border border-white/10 bg-slate-950/55 px-2.5 py-1 text-[11px] font-medium text-slate-100 backdrop-blur-md">
+        {/* <span className="rounded-full border border-white/10 bg-slate-950/55 px-2.5 py-1 text-[11px] font-medium text-slate-100 backdrop-blur-md">
           {hasImage ? "Visual post" : "Text post"}
-        </span>
+        </span> */}
         <span className="rounded-full border border-white/10 bg-slate-950/55 px-2.5 py-1 text-[11px] font-medium text-slate-200 backdrop-blur-md">
           {publishedLabel}
         </span>
