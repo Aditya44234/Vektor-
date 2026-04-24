@@ -6,6 +6,7 @@ import PostCard from "@/src/components/PostCard";
 import { useAuth } from "@/src/context/AuthContext";
 import { usePosts } from "@/src/hooks/usePosts";
 import { useCreatePost } from "@/src/hooks/useCreatePost";
+import PostSkeleton from "@/src/components/PostSkeleton";
 
 export default function FeedPage() {
   const { posts, loading, refetch } = usePosts();
@@ -17,15 +18,25 @@ export default function FeedPage() {
       <Navbar />
 
       <div className="mx-auto  max-w-2xl  pb-32">
-        {loading && <p className="text-sm text-slate-400 mx-4">Loading posts...</p>}
+        {/* {loading && <p className="text-sm text-slate-400 mx-4">Loading posts...</p>} */}
+        {loading ? (
+          <>
+            <PostSkeleton />
+            <PostSkeleton showImage={false} />
+            <PostSkeleton />
+          </>
+        ) : null}
 
         {!loading && posts.length === 0 && (
           <p className="text-sm text-slate-400">No posts yet.</p>
         )}
 
-        {posts.map((post) => (
+        {/* {posts.map((post) => (
           <PostCard key={post._id} post={post} />
-        ))}
+        ))} */}
+
+        {!loading &&
+          posts.map((post) => <PostCard key={post._id} post={post} />)}
       </div>
 
       <BottomActions

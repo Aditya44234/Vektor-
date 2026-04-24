@@ -23,7 +23,7 @@ export default function PostCard({ post }: PostCardProps) {
   const profileHref = author ? `/profile/${author.username}` : "#";
 
   return (
-    <div className="mb-1 min-w-full rounded-md border border-white/10 bg-slate-950/65 py-5 shadow-[0_20px_70px_rgba(0,0,0,0.25)]">
+    <div className=" min-w-full rounded-md border border-white/10 bg-slate-950/65 py-5 shadow-[0_20px_70px_rgba(0,0,0,0.25)]">
       <div className="mb-2 flex items-center gap-3 px-3">
         {author ? (
           <Link href={profileHref} className="flex items-center gap-3">
