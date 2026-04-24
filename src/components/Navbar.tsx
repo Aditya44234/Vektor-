@@ -1,10 +1,16 @@
 "use client";
 
+import { useAuth } from "@/src/context/AuthContext";
+import { LogOut } from "lucide-react";
+import { Pacifico } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { LogOut } from "lucide-react";
-import { useAuth } from "@/src/context/AuthContext";
+
+const pacifico = Pacifico({
+  weight: "400",
+  subsets: ["latin"],
+});
 
 export default function Navbar() {
   const router = useRouter();
@@ -18,11 +24,8 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-20 border-b border-white/10 bg-[#081019]/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4">
-        <Link
-          href="/feed"
-          className="flex items-center gap-2"
-        >
-          <span className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl ">
+        <Link href="/feed" className="flex items-center gap-2">
+          <span className="flex h-12 w-15 items-center justify-center overflow-hidden rounded-2xl ">
             <Image
               src="/BrandLogo.svg"
               alt="Loopin logo"
@@ -32,7 +35,10 @@ export default function Navbar() {
               className="h-full  w-full  object-contain"
             />
           </span>
-          <span className="bg-gradient-to-r from-[#00ff87] via-[#9dffcb] to-[#60efff] bg-clip-text text-xl font-semibold tracking-tight text-transparent">
+          <span
+            // className="bg-gradient-to-r from-[#00ff87] via-[#9dffcb] to-[#60efff] bg-clip-text text-xl font-semibold tracking-tight text-transparent">
+            className={`${pacifico.className} py-3  bg-gradient-to-r from-[#00ff87] via-[#9dffcb] to-[#60efff] bg-clip-text text-2xl tracking-normal text-transparent`}
+          >
             Loopin
           </span>
         </Link>
@@ -57,7 +63,7 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={handleLogout}
-                className="inline-flex items-center gap-2 rounded-md cursor-pointer border border-white/10 px-3 py-2 text-sm text-slate-200 transition hover:border-rose-300/30 hover:bg-rose-500/10 hover:text-white"
+                className="inline-flex items-center gap-2 rounded-md cursor-pointer   px-3 py-2 text-sm text-slate-200 transition hover:border-rose-300/30 hover:bg-rose-500/10 hover:text-white"
               >
                 <LogOut className="h-4 w-4" />
                 {/* Log out */}

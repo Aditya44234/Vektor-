@@ -124,7 +124,7 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(0,255,135,0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(96,239,255,0.16),transparent_30%)]" />
 
       <div className="relative mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-4 py-8 lg:flex-row lg:items-center">
-        <section className="w-full max-w-xl rounded-[36px] border border-white/10 bg-[#08111d]/92 p-8 shadow-[0_30px_120px_rgba(0,0,0,0.35)] backdrop-blur-xl lg:p-10">
+        <section className="w-full max-w-xl rounded-[16px] border border-white/10 bg-[#08111d]/92 p-8 shadow-[0_30px_120px_rgba(0,0,0,0.35)] backdrop-blur-xl lg:p-10">
           <div className="mb-7 flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-[0_0_34px_rgba(96,239,255,0.14)]">
               <Image

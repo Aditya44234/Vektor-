@@ -3,7 +3,9 @@
 :root {
   --background: #07111d;
   --foreground: #f8fafc;
-  --font-sans-ui: "Trebuchet MS", "Segoe UI", sans-serif;
+  /* --font-sans-ui: "Trebuchet MS", "Segoe UI", sans-serif; */
+  --font-sans-ui: var(--font-body), "Trebuchet MS", "Segoe UI", sans-serif;
+
   --font-mono-ui: Consolas, "Courier New", monospace;
 }
 

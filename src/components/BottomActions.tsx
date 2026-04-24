@@ -95,7 +95,7 @@ export default function BottomActions({
             type="button"
             onClick={() => togglePanel("search")}
             aria-label="Search users"
-            className={`flex h-11 w-11 items-center justify-center rounded-full border text-slate-100 transition hover:border-cyan-300/40 hover:bg-cyan-400/10 ${
+            className={`flex h-11 w-11 items-center cursor-pointer justify-center rounded-full border text-slate-100 transition hover:border-cyan-300/40 hover:bg-cyan-400/10 ${
               activePanel === "search"
                 ? "border-cyan-300/50 bg-cyan-400/15 text-cyan-100"
                 : "border-white/10 bg-slate-950/45"
@@ -108,7 +108,7 @@ export default function BottomActions({
             type="button"
             onClick={() => togglePanel("post")}
             aria-label="Create post"
-            className={`flex h-12 w-12 items-center justify-center rounded-full text-slate-950 transition hover:shadow-[0_0_30px_rgba(96,239,255,0.25)] ${
+            className={`flex h-12 w-12 items-center cursor-pointer  justify-center rounded-full text-slate-950 transition hover:shadow-[0_0_30px_rgba(96,239,255,0.25)] ${
               activePanel === "post"
                 ? "bg-white shadow-[0_0_30px_rgba(96,239,255,0.25)]"
                 : "bg-gradient-to-r from-[#00ff87] via-[#32f4c8] to-[#60efff]"
@@ -118,7 +118,7 @@ export default function BottomActions({
           </button>
 
           <div
-            className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-white/15 bg-slate-950/45 text-slate-200 shadow-[0_10px_30px_rgba(0,0,0,0.25)]"
+            className="flex h-11 w-11 cursor-pointer  items-center justify-center overflow-hidden rounded-full border border-white/15 bg-slate-950/45 text-slate-200 shadow-[0_10px_30px_rgba(0,0,0,0.25)]"
             aria-label="Profile"
           >
             {isAuthenticated && user?.profilePic ? (

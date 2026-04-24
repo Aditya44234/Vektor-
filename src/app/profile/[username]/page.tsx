@@ -1,9 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { use, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { ArrowLeft, CalendarDays, Grid3X3, Sparkles } from "lucide-react";
 import Navbar from "@/src/components/Navbar";
-import PostCard from "@/src/components/PostCard";
+import ProfilePageSkeleton from "@/src/components/ProfilePageSkeleton";
+import ProfilePostTile from "@/src/components/ProfilePostTile";
 import {
   getProfileByUsernameAPI,
   type ProfileResponse,
@@ -14,6 +16,7 @@ type ProfilePageProps = {
 };
 
 export default function ProfilePage({ params }: ProfilePageProps) {
+  const router = useRouter();
   const { username } = use(params);
 
   const [profileData, setProfileData] = useState<ProfileResponse | null>(null);
@@ -61,26 +64,33 @@ export default function ProfilePage({ params }: ProfilePageProps) {
       }).format(new Date(profileData.user.createdAt))
     : null;
 
+  const handleBack = () => {
+    if (window.history.length > 1) {
+      router.back();
+      return;
+    }
+
+    router.push("/feed");
+  };
+
   return (
     <div className="min-h-screen">
-      <Navbar />
+      {/* <Navbar /> */}
 
-      <main className="mx-auto mt-8 max-w-2xl px-4 pb-24">
-        <Link
-          href="/feed"
-          className="mb-5 inline-flex rounded-full border border-white/10 px-4 py-2 text-sm text-slate-300 transition hover:bg-white/5 hover:text-white"
+      <main className="mx-auto  max-w-6xl px-4 pb-24">
+        <button
+          type="button"
+          onClick={handleBack}
+          aria-label="Go back"
+          className="mb-5 cursor-pointer  mt-2 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-slate-950/55 text-slate-200 transition hover:border-cyan-300/30 hover:bg-white/5 hover:text-white"
         >
-          Back to feed
-        </Link>
+          <ArrowLeft className="h-5 w-5" />
+        </button>
 
-        {loading ? (
-          <div className="rounded-[28px] border border-white/10 bg-slate-950/65 p-6 text-sm text-slate-400 shadow-[0_20px_70px_rgba(0,0,0,0.25)]">
-            Loading profile...
-          </div>
-        ) : null}
+        {loading ? <ProfilePageSkeleton /> : null}
 
         {!loading && error ? (
-          <div className="rounded-[28px] border border-rose-400/20 bg-rose-500/10 p-6 shadow-[0_20px_70px_rgba(0,0,0,0.25)]">
+          <div className="rounded-[12px] border border-rose-400/20 bg-rose-500/10 p-6 shadow-[0_20px_70px_rgba(0,0,0,0.25)]">
             <h1 className="text-xl font-semibold text-rose-100">
               Profile unavailable
             </h1>
@@ -90,57 +100,83 @@ export default function ProfilePage({ params }: ProfilePageProps) {
 
         {!loading && !error && profileData ? (
           <>
-            <section className="mb-6 rounded-[28px] border border-white/10 bg-slate-950/65 p-6 shadow-[0_20px_70px_rgba(0,0,0,0.25)]">
-              <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
-                <div className="flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-slate-900 text-2xl font-semibold text-white">
-                  {profileData.user.profilePic ? (
-                    <img
-                      src={profileData.user.profilePic}
-                      alt={`${profileData.user.username}'s profile`}
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    profileData.user.username[0]?.toUpperCase() || "?"
-                  )}
+            <section className=" border border-white/10 bg-[linear-gradient(180deg,rgba(8,17,29,0.92),rgba(2,6,23,0.96))] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.34)] md:p-8">
+              <div className="flex flex-col gap-7 md:flex-row md:items-start md:gap-10">
+                <div className="mx-auto md:mx-0">
+                  <div className="rounded-full bg-[linear-gradient(135deg,#00ff87,#60efff,#9dffcb)] p-[2px] shadow-[0_0_40px_rgba(96,239,255,0.16)]">
+                    <div className="flex h-28 w-28 items-center justify-center overflow-hidden rounded-full bg-[#0a1220] text-3xl font-semibold text-white md:h-36 md:w-36">
+                      {profileData.user.profilePic ? (
+                        <img
+                          src={profileData.user.profilePic}
+                          alt={`${profileData.user.username}'s profile`}
+                          className="h-full w-full object-cover"
+                        />
+                      ) : (
+                        profileData.user.username[0]?.toUpperCase() || "?"
+                      )}
+                    </div>
+                  </div>
                 </div>
 
                 <div className="min-w-0 flex-1">
-                  <div className="flex flex-wrap items-center gap-3">
-                    <h1 className="text-2xl font-semibold tracking-tight text-white">
-                      @{profileData.user.username}
-                    </h1>
+                  <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                    <div className="min-w-0">
+                      <h1 className="truncate text-center text-3xl font-semibold tracking-tight text-white md:text-left md:text-4xl">
+                        {profileData.user.username}
+                      </h1>
+                      <p className="mt-2 text-center text-sm font-medium text-cyan-100/85 md:text-left">
+                        @{profileData.user.username}
+                      </p>
+                    </div>
 
-                    <span className="rounded-full border border-cyan-300/20 bg-cyan-400/10 px-3 py-1 text-xs font-medium text-cyan-100">
-                      {profileData.posts.length}{" "}
-                      {profileData.posts.length === 1 ? "post" : "posts"}
-                    </span>
-
-                    {joinedLabel ? (
-                      <span className="rounded-full border border-white/10 px-3 py-1 text-xs text-slate-400">
-                        Joined {joinedLabel}
-                      </span>
-                    ) : null}
+                    <div className="flex justify-center md:justify-end">
+                      {joinedLabel ? (
+                        <span className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-300">
+                          <CalendarDays className="h-4 w-4 text-cyan-200" />
+                          Joined {joinedLabel}
+                        </span>
+                      ) : null}
+                    </div>
                   </div>
 
-                  <p className="mt-4 text-sm leading-6 text-slate-300">
+                  <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+                    <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
+                      <p className="text-xs uppercase tracking-[0.24em] text-slate-500">
+                        Posts
+                      </p>
+                      <p className="mt-3 text-2xl font-semibold text-white">
+                        {profileData.posts.length}
+                      </p>
+                    </div>
+                    <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
+                      <p className="text-xs uppercase tracking-[0.24em] text-slate-500">
+                        Topics
+                      </p>
+                      <p className="mt-3 text-2xl font-semibold text-white">
+                        {profileData.user.interests?.length ?? 0}
+                      </p>
+                    </div>
+                  </div>
+
+                  <p className="mt-6 max-w-3xl text-center text-sm leading-7 text-slate-300 md:text-left">
                     {profileData.user.bio?.trim() ||
                       "This profile has not added a bio yet."}
                   </p>
 
                   {profileData.user.interests &&
                   profileData.user.interests.length > 0 ? (
-                    <div className="mt-4 flex flex-wrap gap-2">
+                    <div className="mt-6 flex flex-wrap justify-center gap-2 md:justify-start">
                       {profileData.user.interests.map((interest) => (
                         <span
                           key={interest}
-                          className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-slate-200"
+                          className="rounded-full border border-cyan-300/15 bg-cyan-400/10 px-3 py-1.5 text-xs font-medium text-cyan-100"
                         >
                           {interest}
                         </span>
                       ))}
                     </div>
                   ) : (
-                    <p className="mt-4 text-sm text-slate-500">
+                    <p className="mt-6 text-center text-sm text-slate-500 md:text-left">
                       No interests added yet.
                     </p>
                   )}
@@ -148,11 +184,15 @@ export default function ProfilePage({ params }: ProfilePageProps) {
               </div>
             </section>
 
-            <section>
-              <div className="mb-4">
-                <h2 className="text-lg font-semibold text-slate-100">
-                  {profileData.user.username}&apos;s posts
-                </h2>
+            <section className="mt-8">
+              <div className="mb-5 flex items-center justify-between border-b border-white/10 pb-4">
+                <div className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.24em] text-slate-200">
+                  <Grid3X3 className="h-4 w-4 text-cyan-200" />
+                  Posts
+                </div>
+                {/* <span className="text-sm text-slate-400">
+                  {profileData.posts.length} total
+                </span> */}
               </div>
 
               {profileData.posts.length === 0 ? (
@@ -160,9 +200,11 @@ export default function ProfilePage({ params }: ProfilePageProps) {
                   No posts yet.
                 </div>
               ) : (
-                profileData.posts.map((post) => (
-                  <PostCard key={post._id} post={post} />
-                ))
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
+                  {profileData.posts.map((post) => (
+                    <ProfilePostTile key={post._id} post={post} />
+                  ))}
+                </div>
               )}
             </section>
           </>
