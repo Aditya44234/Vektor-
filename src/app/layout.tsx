@@ -13,8 +13,8 @@ export const metadata: Metadata = {
   title: "Loopin",
   description: "Share quick posts and stay in the loop.",
   icons: {
-    icon: [{ url: "/BrandLogo.svg", type: "image/svg+xml" }],
-    shortcut: "/BrandLogo.svg",
+    icon: [{ url: "/loopinLogo.svg", type: "image/svg+xml" }],
+    shortcut: "/loopinLogo.svg",
   },
 };
 

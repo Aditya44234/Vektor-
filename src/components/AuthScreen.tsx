@@ -124,7 +124,7 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
       }}
     >
       {/* Overlay for better readability */}
-      <div className="absolute inset-0 bg-black/40" />
+      {/* <div className="absolute inset-0 bg-black/40" /> */}
       
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(0,255,135,0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(96,239,255,0.16),transparent_30%)]" />
 

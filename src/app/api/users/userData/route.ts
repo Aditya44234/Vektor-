@@ -9,7 +9,7 @@ export async function GET() {
     const users = await User.find(
       {},
       "username email profilePic bio interests createdAt"
-    ).lean();
+    ).lean().sort({ createdAt: -1 });
 
     return Response.json(
       {

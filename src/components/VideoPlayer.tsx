@@ -79,7 +79,7 @@ export default function VideoPlayer({ src }: VideoPlayerProps) {
   return (
     <div
       ref={containerRef}
-      className="mb-3 w-full overflow-hidden border border-white/10 bg-slate-900 rounded-md relative group"
+      className="mb-3 max-h-120 w-full overflow-hidden border border-white/10 bg-slate-900 rounded-md relative group"
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
       onTouchStart={() => setShowControls(true)}
@@ -98,6 +98,7 @@ export default function VideoPlayer({ src }: VideoPlayerProps) {
 
       {/* Controls - shown on hover/touch */}
       {showControls && (
+        <>
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3 flex items-center gap-2">
           <button
             onClick={togglePlay}
@@ -123,6 +124,7 @@ export default function VideoPlayer({ src }: VideoPlayerProps) {
             )}
           </button>
         </div>
+              </>
       )}
     </div>
   );
