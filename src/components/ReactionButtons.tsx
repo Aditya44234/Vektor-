@@ -57,15 +57,21 @@ export default function ReactionButtons({
 
       if (type === "like") {
         if (useHasLikes) {
+          // Remove like if already liked
           setLocalLikes(localLikes.filter((id) => id !== currentUserId));
         } else {
+          // Add like and remove from piss (mutually exclusive)
           setLocalLikes([...localLikes, currentUserId]);
+          setLocalPiss(localPiss.filter((id) => id !== currentUserId));
         }
       } else {
         if (useHasPissed) {
+          // Remove piss if already pissed
           setLocalPiss(localPiss.filter((id) => id !== currentUserId));
         } else {
+          // Add piss and remove from likes (mutually exclusive)
           setLocalPiss([...localPiss, currentUserId]);
+          setLocalLikes(localLikes.filter((id) => id !== currentUserId));
         }
       }
     } catch (error) {

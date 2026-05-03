@@ -3,9 +3,10 @@ import { Post } from "@/src/models/Post"
 export async function createPost(data: {
     userId: string,
     content: string,
-    imageUrl?: string;
+    imageUrl?: string,
+    videoUrl?: string,
 }) {
-    const { userId, content, imageUrl } = data;
+    const { userId, content, imageUrl, videoUrl } = data;
 
     if (!content) {
         throw new Error("Content is required");
@@ -15,6 +16,7 @@ export async function createPost(data: {
         userId,
         content,
         imageUrl: imageUrl || "",
+        videoUrl: videoUrl || "",
     })
 
     return post;

@@ -1,4 +1,4 @@
-import { Post } from "@/src/models/Post"
+import { Post } from "@/src/models/Post";
 
 export async function toggleReaction(data: {
     postId: string;
@@ -11,15 +11,22 @@ export async function toggleReaction(data: {
         throw new Error("Post now found ");
     }
     const field = type === "like" ? "likes" : "piss";
+    const oppositeField = type === "like" ? "piss" : "likes";
 
     const alreadyReacted = post[field].includes(userId);
 
     if (alreadyReacted) {
+        // Remove the reaction if already exists
         post[field] = post[field].filter(
             (id: { toString: () => string }) => id.toString() !== userId
         );
     } else {
-        post[field].push(userId)
+        // Add the reaction and remove from opposite reaction
+        post[field].push(userId);
+        // Remove from opposite reaction type (mutually exclusive)
+        post[oppositeField] = post[oppositeField].filter(
+            (id: { toString: () => string }) => id.toString() !== userId
+        );
     }
     await post.save();
     return post

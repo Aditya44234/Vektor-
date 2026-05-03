@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { Post } from "@/src/types/post.types";
 import { useAuth } from "../context/AuthContext";
 import ReactionButtons from "./ReactionButtons";
+import VideoPlayer from "./VideoPlayer";
 
 type PostCardProps = {
   post: Post;
@@ -56,6 +57,8 @@ export default function PostCard({ post }: PostCardProps) {
           </>
         )}
       </div>
+
+     {post.videoUrl && <VideoPlayer src={post.videoUrl} />}
 
       {post.imageUrl && (
         <div className="mb-3 max-h-120 w-full overflow-hidden border border-white/10 bg-slate-900">

@@ -3,7 +3,6 @@
 import { Plus } from "lucide-react";
 import { useState } from "react";
 
-
 type CreatePostProps = {
   onSubmit: (content: string, file?: File) => Promise<boolean>;
   loading: boolean;
@@ -50,15 +49,23 @@ export default function CreatePost({
         <label className="flex cursor-pointer items-center gap-2 rounded-md border border-white/10 px-4 py-2 text-sm text-slate-300 transition hover:border-cyan-300/40 hover:text-cyan-100">
           <input
             type="file"
-            accept="image/*"
+            accept="image/*, video/*"
             className="hidden"
             onChange={(e) => {
               if (e.target.files?.[0]) {
-                setFile(e.target.files[0]);
+                const selectedFile = e.target.files[0];
+
+                // Validate file size (100MB max)
+                if (selectedFile.size > 100 * 1024 * 1024) {
+                  alert("File size must be less than 100MB");
+                  return;
+                }
+
+                setFile(selectedFile);
               }
             }}
           />
-          {file ? `Selected: ${file.name}` : <Plus/>}
+          {file ? `Selected: ${file.name}` : <Plus />}
         </label>
 
         <button

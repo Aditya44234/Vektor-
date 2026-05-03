@@ -18,6 +18,10 @@ const PostSchema = new Schema(
             type: String,
             default: "",
         },
+        videoUrl: {
+            type: String,
+            default: "",
+        },
 
         category: {
             type: String,

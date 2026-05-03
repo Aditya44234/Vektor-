@@ -60,13 +60,13 @@ export default function Navbar() {
               <span className="hidden rounded-md border border-cyan-300/20 bg-cyan-400/10 px-3 py-2 text-sm text-cyan-100 sm:inline-flex">
                 @{user?.username}
               </span>
-              {/* <button
+               <button
                 type="button"
                 onClick={handleLogout}
                 className="inline-flex items-center gap-2 rounded-md cursor-pointer   px-3 py-2 text-sm text-slate-200 transition hover:border-rose-300/30 hover:bg-rose-500/10 hover:text-white"
               >
                 <LogOut className="h-4 w-4" />
-              </button> */}
+              </button>  
             </>
           ) : (
             <>

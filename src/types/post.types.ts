@@ -7,6 +7,7 @@ export type Post = {
   userId: string | PostAuthor;
   content: string;
   imageUrl?: string;
+  videoUrl?:string; 
   category?: string;
   likes: string[];
   piss: string[];

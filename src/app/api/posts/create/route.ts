@@ -9,7 +9,7 @@ export async function POST(req: Request) {
 
     const user = getUserFromRequest(req);
     const body = await req.json();
-    const { content, imageUrl } = body;
+    const { content, imageUrl ,videoUrl} = body;
 
     if (!content) {
       return Response.json({ error: "Content required" }, { status: 400 });
@@ -19,6 +19,7 @@ export async function POST(req: Request) {
       userId: user.userId,
       content,
       imageUrl,
+      videoUrl,
     });
 
     return Response.json({ message: "post created", post }, { status: 201 });

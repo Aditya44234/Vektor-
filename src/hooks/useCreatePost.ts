@@ -3,7 +3,7 @@
 import { useCallback, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { createPostAPI } from "../services/post.api";
-import { uploadImageAPI } from "../services/upload.api";
+import { uploadAPI } from "../services/upload.api";
 
 export function useCreatePost(refetch: () => void) {
   const { token, isReady } = useAuth();
@@ -31,16 +31,25 @@ export function useCreatePost(refetch: () => void) {
         setError(null);
 
         let imageUrl = "";
+        let videoUrl = "";
+
 
         if (file) {
-          const uploadRes = await uploadImageAPI(file);
-          imageUrl = uploadRes.url;
+          const uploadRes = await uploadAPI(file);
+
+          if (uploadRes.type === "video") {
+            videoUrl = uploadRes.url;
+          } else {
+            imageUrl = uploadRes.url;
+          }
         }
 
         await createPostAPI(
-          imageUrl
-            ? { content: trimmedContent, imageUrl }
-            : { content: trimmedContent },
+          {
+            content: trimmedContent,
+            ...(imageUrl && { imageUrl }),
+            ...(videoUrl && { videoUrl }),
+          },
           token
         );
         await refetch();
