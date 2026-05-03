@@ -1,7 +1,7 @@
 "use client";
 
-import { Volume2, VolumeX, Play, Pause } from "lucide-react";
-import { useState, useRef } from "react";
+import { Pause, Play, Volume2, VolumeX } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 type VideoPlayerProps = {
   src: string;
@@ -9,9 +9,45 @@ type VideoPlayerProps = {
 
 export default function VideoPlayer({ src }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const [showControls, setShowControls] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Intersection Observer - detect when video is in viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVisible(entry.isIntersecting);
+
+          if (entry.isIntersecting && videoRef.current) {
+            // Play when visible
+            videoRef.current.play();
+            setIsPlaying(true);
+          } else if (!entry.isIntersecting && videoRef.current) {
+            // Pause when not visible
+            videoRef.current.pause();
+            setIsPlaying(false);
+          }
+        });
+      },
+      {
+        threshold: 0.5, // Trigger when 50% of video is visible
+      }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, []);
 
   const togglePlay = () => {
     if (videoRef.current) {
@@ -31,8 +67,18 @@ export default function VideoPlayer({ src }: VideoPlayerProps) {
     }
   };
 
+  const handleVideoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // Toggle play/pause on video click
+    togglePlay();
+    // Show controls
+    setShowControls(true);
+    setTimeout(() => setShowControls(false), 3000);
+  };
+
   return (
     <div
+      ref={containerRef}
       className="mb-3 w-full overflow-hidden border border-white/10 bg-slate-900 rounded-md relative group"
       onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => setShowControls(false)}
@@ -41,8 +87,11 @@ export default function VideoPlayer({ src }: VideoPlayerProps) {
     >
       <video
         ref={videoRef}
-        className="h-full w-full object-contain"
+        className="h-full w-full object-contain cursor-pointer"
         src={src}
+        muted={isMuted}
+        loop
+        onClick={handleVideoClick}
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
       />
