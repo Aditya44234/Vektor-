@@ -1,15 +1,12 @@
 "use client";
 
+import { useAuth } from "@/src/context/AuthContext";
+import { loginAPI, signUpAPI } from "@/src/services/auth.api";
+import { ArrowRight, Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { startTransition, useEffect, useState } from "react";
-import {
-  ArrowRight,
-  Plus,
-} from "lucide-react";
-import { useAuth } from "@/src/context/AuthContext";
-import { loginAPI, signUpAPI } from "@/src/services/auth.api";
 import { uploadImageAPI } from "../services/upload.api";
 
 type AuthMode = "login" | "signup";
@@ -120,10 +117,18 @@ export default function AuthScreen({ mode }: AuthScreenProps) {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div
+      className="relative h-screen overflow-hidden overflow-y-hidden bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: `url('${mode === "login" ? "/register.png" : "/login.png"}')`,
+      }}
+    >
+      {/* Overlay for better readability */}
+      <div className="absolute inset-0 bg-black/40" />
+      
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(0,255,135,0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(96,239,255,0.16),transparent_30%)]" />
 
-      <div className="relative mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-4 py-8 lg:flex-row lg:items-center">
+      <div className="relative mx-auto flex h-screen max-w-6xl flex-col gap-8 px-4 py-8 lg:flex-row lg:items-center">
         <section className="w-full max-w-xl rounded-[16px] border border-white/10 bg-[#08111d]/92 p-8 shadow-[0_30px_120px_rgba(0,0,0,0.35)] backdrop-blur-xl lg:p-10">
           <div className="mb-7 flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-[0_0_34px_rgba(96,239,255,0.14)]">
